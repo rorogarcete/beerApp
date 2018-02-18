@@ -1,4 +1,4 @@
-package org.buffer.android.boilerplate.data.executor
+package com.lastserv.app.beer.data.executor
 
 import com.lastserv.app.beer.domain.executor.ThreadExecutor
 
