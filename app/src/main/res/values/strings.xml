@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BeerApp</string>
+    <string name="title_activity_favorite">FavoriteActivity</string>
+    <string name="title_activity_beer_detail">BeerDetailActivity</string>
 </resources>
