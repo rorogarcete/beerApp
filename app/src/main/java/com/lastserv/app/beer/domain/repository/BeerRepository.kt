@@ -1,7 +1,7 @@
 package com.lastserv.app.beer.domain.repository
 
 import com.lastserv.app.beer.domain.model.Beer
-
+import com.lastserv.app.beer.domain.model.BeerFavorite
 import io.reactivex.Completable
 import io.reactivex.Single
 
@@ -17,5 +17,9 @@ interface BeerRepository {
     fun saveBeers(beers: List<Beer>): Completable
 
     fun getBeers(): Single<List<Beer>>
+
+    fun getFavorites(): Single<List<BeerFavorite>>
+
+    fun saveFavorite(beerFavorite: BeerFavorite): Completable
 
 }
