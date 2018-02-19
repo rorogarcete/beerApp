@@ -14,7 +14,7 @@ open class BeerEntityMapper @Inject constructor(): EntityMapper<BeerModel, BeerE
      * Map an instance of a [BeerModel] to a [BeerEntity] model
      */
     override fun mapFromRemote(type: BeerModel): BeerEntity {
-        return BeerEntity(type.name, type.description, type.tagline, type.image)
+        return BeerEntity(type.name, type.description, type.tagline, type.image_url)
     }
 
 }

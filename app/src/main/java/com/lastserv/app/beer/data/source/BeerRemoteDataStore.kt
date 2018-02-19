@@ -19,12 +19,12 @@ open class BeerRemoteDataStore @Inject constructor(private val beerRemote: BeerR
         throw UnsupportedOperationException()
     }
 
-    override fun saveBeers(bufferoos: List<BeerEntity>): Completable {
+    override fun saveBeers(beers: List<BeerEntity>): Completable {
         throw UnsupportedOperationException()
     }
 
     /**
-     * Retrieve a list of [BufferooEntity] instances from the API
+     * Retrieve a list of [BeerEntity] instances from the API
      */
     override fun getBeers(): Single<List<BeerEntity>> {
         return beerRemote.getBeers()

@@ -17,7 +17,7 @@ interface BeerContract {
 
         fun showBeers(beers: List<BeerView>)
 
-        fun checkFavoriteBeer(beer: BeerView)
+//        fun checkFavoriteBeer(beer: BeerView)
 
         fun hideBeers()
 

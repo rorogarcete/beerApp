@@ -18,8 +18,8 @@ interface BeerRepository {
 
     fun getBeers(): Single<List<Beer>>
 
-    fun getFavorites(): Single<List<BeerFavorite>>
-
-    fun saveFavorite(beerFavorite: BeerFavorite): Completable
+//    fun getFavorites(): Single<List<BeerFavorite>>
+//
+//    fun saveFavorite(beerFavorite: BeerFavorite): Completable
 
 }
