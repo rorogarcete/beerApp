@@ -2,7 +2,6 @@ package com.lastserv.app.beer.cache
 
 import android.content.Context
 import android.content.SharedPreferences
-
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -15,7 +14,7 @@ class PreferencesHelper @Inject constructor(context: Context) {
     companion object {
         private val PREF_PACKAGE_NAME = "com.lastserv.app.beer.preferences"
 
-        private val PREF_KEY_LAST_CACHE = "last_cache"
+        private val PREF_KEY_LAST_CACHE = "cache"
     }
 
     private val bufferPref: SharedPreferences

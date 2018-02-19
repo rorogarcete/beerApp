@@ -5,14 +5,11 @@ import com.lastserv.app.beer.cache.model.CachedBeer
 import com.lastserv.app.beer.data.mapper.BeerMapper
 import com.lastserv.app.beer.data.model.BeerEntity
 import com.lastserv.app.beer.data.repository.BeerCache
-
 import io.reactivex.Completable
 import io.reactivex.Single
-
 import io.realm.Realm
 import io.realm.kotlin.where
 import java.util.*
-
 import javax.inject.Inject
 
 /**
@@ -20,10 +17,10 @@ import javax.inject.Inject
  * [BeerCache] from the Data layer as it is that layers responsibility for defining the
  * operations in which data store implementation layers can carry out.
  */
-class BufferooCacheImpl @Inject constructor(realm: Realm,
-                                            private val entityMapper: BeerEntityMapper,
-                                            private val mapper: BeerMapper,
-                                            private val preferencesHelper: PreferencesHelper):
+class BeerCacheImpl @Inject constructor(realm: Realm,
+                                        private val entityMapper: BeerEntityMapper,
+                                        private val mapper: BeerMapper,
+                                        private val preferencesHelper: PreferencesHelper):
         BeerCache {
 
     private val EXPIRATION_TIME = (60 * 10 * 1000).toLong()
@@ -76,21 +73,7 @@ class BufferooCacheImpl @Inject constructor(realm: Realm,
     override fun getBeers(): Single<List<BeerEntity>> {
         val beers: List<BeerEntity> = Collections.emptyList()
 
-        //return getRealm().where<CachedBeer>().findAll()
-
         return Single.defer<List<BeerEntity>> {
-            //val updatesCursor = database.rawQuery(BufferooConstants.QUERY_GET_ALL_BUFFEROOS, null)
-
-            //val beers = getRealm().where<CachedBeer>().findAll()
-            //RealmResults<CachedBeer> beers : getRealm().where(CachedBeer)
-//            val beersEntities: List<BeerEntity>
-
-           //for (beer in beers)
-                //val cachedBeer = getRealm().
-                //beers.add(entityMapper.mapFromCached(cachedBeer))
-//            }
-//
-//            updatesCursor.close()
             Single.just<List<BeerEntity>>(beers)
         }
     }
