@@ -9,7 +9,7 @@ import javax.inject.Inject
  * Map a [BeerView] to and from a [Beer] instance when data is moving between
  * this layer and the Domain layer
  */
-open class BufferooMapper @Inject constructor(): Mapper<BeerView, Beer> {
+open class BeerMapper @Inject constructor(): Mapper<BeerView, Beer> {
 
     /**
      * Map a [Beer] instance to a [BeerView] instance

@@ -2,7 +2,7 @@ package com.lastserv.app.beer.presentation.beers
 
 import com.lastserv.app.beer.presentation.BasePresenter
 import com.lastserv.app.beer.presentation.BaseView
-import com.lastserv.app.beer.ui.model.BeerViewModel
+import com.lastserv.app.beer.presentation.model.BeerView
 
 /**
  * Defines a contract of operations between the BeerPresenter and Beer View
@@ -15,7 +15,7 @@ interface BeerContract {
 
         fun hideProgress()
 
-        fun showBeers(beers: List<BeerViewModel>)
+        fun showBeers(beers: List<BeerView>)
 
         fun hideBeers()
 
