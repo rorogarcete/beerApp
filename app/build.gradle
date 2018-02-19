@@ -7,6 +7,7 @@ apply plugin: 'realm-android'
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
+
     defaultConfig {
         applicationId "com.lastserv.app.beer"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -15,12 +16,20 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    buildToolsVersion '26.0.2'
 }
 
 kapt {
@@ -34,6 +43,8 @@ dependencies {
     compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
     compile "com.android.support.constraint:constraint-layout:$rootProject.ext.constraintLayoutVersion"
 
+    compile "com.github.vicpinm:krealmextensions:2.1.1"
+
     compile "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
     compile "io.reactivex.rxjava2:rxkotlin:$rootProject.ext.rxKotlinVersion"
 
@@ -45,7 +56,6 @@ dependencies {
 
     compile "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
 
-    compile "javax.annotation:jsr250-api:$rootProject.ext.javaxAnnotationVersion"
     compile "javax.inject:javax.inject:$rootProject.ext.javaxInjectVersion"
     kapt "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"
     kapt "com.google.dagger:dagger-android-processor:$rootProject.ext.daggerVersion"
@@ -58,6 +68,4 @@ dependencies {
     testCompile "com.nhaarman:mockito-kotlin:$rootProject.ext.mockitoKotlinVersion"
     testCompile "org.assertj:assertj-core:$rootProject.ext.assertJVersion"
     testCompile "org.jetbrains.kotlin:kotlin-test-junit:$rootProject.ext.kotlin_version"
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:26.+'
 }
