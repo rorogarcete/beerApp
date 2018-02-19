@@ -1,10 +1,9 @@
 package com.lastserv.app.beer.presentation.beers
 
+import io.reactivex.observers.DisposableSingleObserver
 import com.lastserv.app.beer.domain.interactor.base.SingleUseCase
 import com.lastserv.app.beer.domain.model.Beer
-import com.lastserv.app.beer.ui.mapper.BeerMapper
-
-import io.reactivex.observers.DisposableSingleObserver
+import com.lastserv.app.beer.presentation.mapper.BeerMapper
 
 import javax.inject.Inject
 
@@ -32,7 +31,7 @@ class BeerPresenter @Inject constructor(val beerView: BeerContract.View,
         beerView.hideErrorState()
         if (beers.isNotEmpty()) {
             beerView.hideEmptyState()
-            beerView.showBeers(beers.map { beerMapper.mapToViewModel(it) })
+            beerView.showBeers(beers.map { beerMapper.mapToView(it) })
         } else {
             beerView.hideBeers()
             beerView.showEmptyState()

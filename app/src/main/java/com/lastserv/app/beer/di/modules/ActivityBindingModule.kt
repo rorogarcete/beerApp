@@ -2,7 +2,6 @@ package com.lastserv.app.beer.di.modules
 
 import com.lastserv.app.beer.di.scopes.PerActivity
 import com.lastserv.app.beer.ui.beers.BeerActivity
-
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -10,7 +9,7 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityBindingModule {
 
     @PerActivity
-    @ContributesAndroidInjector(modules = arrayOf(BeerActivity::class))
+    @ContributesAndroidInjector(modules = arrayOf(BeerActivityModule::class))
     abstract fun bindMainActivity(): BeerActivity
 
 }
