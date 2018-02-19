@@ -1,14 +1,16 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.1.4'
+    ext.kotlin_version = '1.2.10'
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        //classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:2.3.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "io.realm:realm-gradle-plugin:4.3.3"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -28,7 +30,7 @@ task clean(type: Delete) {
 
 ext {
     //Android
-    buildToolsVersion = '26.0.2'
+    buildToolsVersion = '26.0.1'
     minSdkVersion = 15
     targetSdkVersion = 26
     compileSdkVersion = 26
@@ -44,7 +46,11 @@ ext {
     rxKotlinVersion = '2.1.0'
     rxAndroidVersion = '2.0.1'
 
+    //Gson
     gsonVersion = '2.8.1'
+
+    //Glide
+    glideVersion = '4.0.0'
 
     //DI
     javaxAnnotationVersion = '1.0'
