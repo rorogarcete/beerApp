@@ -18,6 +18,19 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.beers.BeerActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
+            android:name=".ui.beers.BeerDetailActivity"
+            android:label="@string/title_activity_beer_detail"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
+            android:name=".ui.favorites.FavoriteActivity"
+            android:label="@string/title_activity_favorite"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>
