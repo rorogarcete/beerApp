@@ -10,7 +10,6 @@ import com.lastserv.app.beer.cache.mapper.BeerEntityMapper
 import com.lastserv.app.beer.data.BeerDataRepository
 import com.lastserv.app.beer.data.executor.JobExecutor
 import com.lastserv.app.beer.data.mapper.BeerMapper
-import com.lastserv.app.beer.data.remote.BeerServiceFactory
 import com.lastserv.app.beer.data.repository.BeerCache
 import com.lastserv.app.beer.data.repository.BeerRemote
 import com.lastserv.app.beer.data.source.BeerDataStoreFactory
@@ -20,9 +19,11 @@ import com.lastserv.app.beer.domain.executor.ThreadExecutor
 import com.lastserv.app.beer.domain.repository.BeerRepository
 import com.lastserv.app.beer.remote.BeerRemoteImpl
 import com.lastserv.app.beer.remote.BeerService
+import com.lastserv.app.beer.remote.BeerServiceFactory
 import dagger.Module
 import dagger.Provides
 import io.realm.Realm
+import io.realm.RealmConfiguration
 
 /**
  * @author Rodrigo Garcete
@@ -47,18 +48,27 @@ open class ApplicationModule {
 
     @Provides
     @PerApplication
-    internal fun provideBeerRepository(factory: BeerDataStoreFactory,
-                                           mapper: BeerMapper): BeerRepository {
-        return BeerDataRepository(factory, mapper)
+    internal fun provideRealm(context: Context): Realm {
+        Realm.init(context)
+        val realmConfiguration = RealmConfiguration.Builder()
+                .name("beers.realm")
+                .schemaVersion(1)
+                .deleteRealmIfMigrationNeeded()
+                //.initialData(RealmInitialData())
+                //.migration()
+                .build()
+
+        Realm.setDefaultConfiguration(realmConfiguration)
+
+        return Realm.getDefaultInstance()
     }
 
     @Provides
     @PerApplication
-    internal fun provideBeerCache(factory: Realm,
+    internal fun provideBeerCache(realm: Realm,
                                   entityMapper: BeerEntityMapper,
-                                  mapper: BeerMapper,
                                   helper: PreferencesHelper): BeerCache {
-        return BeerCacheImpl(factory, entityMapper, mapper, helper)
+        return BeerCacheImpl(realm, entityMapper, helper)
     }
 
     @Provides
@@ -66,6 +76,13 @@ open class ApplicationModule {
     internal fun provideBeerRemote(service: BeerService,
                                    factory: com.lastserv.app.beer.remote.mapper.BeerEntityMapper): BeerRemote {
         return BeerRemoteImpl(service, factory)
+    }
+
+    @Provides
+    @PerApplication
+    internal fun provideBeerRepository(factory: BeerDataStoreFactory,
+                                       mapper: BeerMapper): BeerRepository {
+        return BeerDataRepository(factory, mapper)
     }
 
     @Provides
@@ -82,7 +99,7 @@ open class ApplicationModule {
 
     @Provides
     @PerApplication
-    internal fun provideBeerService(): com.lastserv.app.beer.data.remote.BeerService {
+    internal fun provideBeerService(): BeerService {
         return BeerServiceFactory.makeBeerService(BuildConfig.DEBUG)
     }
 }

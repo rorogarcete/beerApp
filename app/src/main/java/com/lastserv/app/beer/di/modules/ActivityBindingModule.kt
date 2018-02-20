@@ -10,6 +10,6 @@ abstract class ActivityBindingModule {
 
     @PerActivity
     @ContributesAndroidInjector(modules = arrayOf(BeerActivityModule::class))
-    abstract fun bindMainActivity(): BeerActivity
+    abstract fun bindBeerActivity(): BeerActivity
 
 }

@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/bar_layout"
+        android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -12,23 +12,24 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <FrameLayout
+    <!--<FrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_below="@+id/bar_layout">-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_beer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/bar_layout">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_beer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
-            android:scrollbars="vertical"
-            android:visibility="gone" />
+        android:layout_below="@+id/appbar_layout"
+        android:layout_margin="8dp"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:scrollbars="vertical"
+        android:visibility="visible" />
 
         <include android:id="@+id/progress" layout="@layout/progress"/>
 
-    </FrameLayout>
+    <!--</FrameLayout>-->
 
 </RelativeLayout>
