@@ -24,8 +24,8 @@ open class BeerActivityModule {
     @PerActivity
     @Provides
     internal fun provideBeerPresenter(mainView: BeerContract.View,
-                                      getBeers: GetBeers, mapper: BeerMapper):
-            BeerContract.Presenter {
+                                      getBeers: GetBeers,
+                                      mapper: BeerMapper): BeerContract.Presenter {
         return BeerPresenter(mainView, getBeers, mapper)
     }
 

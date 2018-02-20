@@ -1,7 +1,6 @@
 package com.lastserv.app.beer.data.repository
 
 import com.lastserv.app.beer.data.model.BeerEntity
-
 import io.reactivex.Single
 
 /**

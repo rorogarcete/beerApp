@@ -4,7 +4,6 @@ import io.reactivex.observers.DisposableSingleObserver
 import com.lastserv.app.beer.domain.interactor.base.SingleUseCase
 import com.lastserv.app.beer.domain.model.Beer
 import com.lastserv.app.beer.presentation.mapper.BeerMapper
-
 import javax.inject.Inject
 
 class BeerPresenter @Inject constructor(val beerView: BeerContract.View,
@@ -27,17 +26,6 @@ class BeerPresenter @Inject constructor(val beerView: BeerContract.View,
         getBeersUseCase.execute(BeerSubscriber())
     }
 
-    internal fun handleGetBeersSuccess(beers: List<Beer>) {
-        beerView.hideErrorState()
-        if (beers.isNotEmpty()) {
-            beerView.hideEmptyState()
-            beerView.showBeers(beers.map { beerMapper.mapToView(it) })
-        } else {
-            beerView.hideBeers()
-            beerView.showEmptyState()
-        }
-    }
-
     inner class BeerSubscriber: DisposableSingleObserver<List<Beer>>() {
 
         override fun onSuccess(t: List<Beer>) {
@@ -50,6 +38,17 @@ class BeerPresenter @Inject constructor(val beerView: BeerContract.View,
             beerView.showErrorState()
         }
 
+    }
+
+    internal fun handleGetBeersSuccess(beers: List<Beer>) {
+        beerView.hideErrorState()
+        if (beers.isNotEmpty()) {
+            beerView.hideEmptyState()
+            beerView.showBeers(beers.map { beerMapper.mapToView(it) })
+        } else {
+            beerView.hideBeers()
+            beerView.showEmptyState()
+        }
     }
 
 }

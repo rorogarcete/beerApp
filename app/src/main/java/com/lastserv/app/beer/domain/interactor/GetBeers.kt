@@ -5,9 +5,7 @@ import com.lastserv.app.beer.domain.executor.ThreadExecutor
 import com.lastserv.app.beer.domain.interactor.base.SingleUseCase
 import com.lastserv.app.beer.domain.model.Beer
 import com.lastserv.app.beer.domain.repository.BeerRepository
-
 import io.reactivex.Single
-
 import javax.inject.Inject
 
 /**

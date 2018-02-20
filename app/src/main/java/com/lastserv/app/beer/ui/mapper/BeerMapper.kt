@@ -2,7 +2,6 @@ package com.lastserv.app.beer.ui.mapper
 
 import com.lastserv.app.beer.presentation.model.BeerView
 import com.lastserv.app.beer.ui.model.BeerViewModel
-
 import javax.inject.Inject
 
 /**
@@ -15,7 +14,7 @@ open class BeerMapper @Inject constructor(): Mapper<BeerViewModel, BeerView> {
      * Map a [Beer] instance to a [BeerViewModel] instance
      */
     override fun mapToViewModel(type: BeerView): BeerViewModel {
-        return BeerViewModel(type.name, type.tagline, type.image)
+        return BeerViewModel(type.name, type.description, type.tagline, type.image_url)
     }
 
 

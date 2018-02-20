@@ -18,8 +18,25 @@ class BeerActivity : AppCompatActivity(), BeerContract.View {
     @Inject lateinit var beerAdapter: BeerAdapter
     @Inject lateinit var mapper: BeerMapper
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_beer)
+        AndroidInjection.inject(this)
+        setupRecycler()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        beerPresenter.start()
+    }
+
     override fun setPresenter(presenter: BeerContract.Presenter) {
         beerPresenter = presenter
+    }
+
+    private fun setupRecycler() {
+        recycler_beer.layoutManager = LinearLayoutManager(this)
+        recycler_beer.adapter = beerAdapter
     }
 
     override fun hideProgress() {
@@ -37,36 +54,15 @@ class BeerActivity : AppCompatActivity(), BeerContract.View {
     }
 
     override fun hideBeers() {
-        recycler_beer.visibility = View.VISIBLE
+        recycler_beer.visibility = View.GONE
     }
 
-    override fun showErrorState() {
-    }
+    override fun showErrorState() {}
 
-    override fun hideErrorState() {
-    }
+    override fun hideErrorState() {}
 
-    override fun showEmptyState() {
-    }
+    override fun showEmptyState() {}
 
-    override fun hideEmptyState() {
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_beer)
-        AndroidInjection.inject(this)
-        setupBrowseRecycler()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        beerPresenter.start()
-    }
-
-    private fun setupBrowseRecycler() {
-        recycler_beer.layoutManager = LinearLayoutManager(this)
-        recycler_beer.adapter = beerAdapter
-    }
+    override fun hideEmptyState() {}
 
 }
