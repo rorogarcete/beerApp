@@ -25,7 +25,7 @@ class FavoriteAdapter @Inject constructor(): RecyclerView.Adapter<FavoriteAdapte
         holder.taglineText.text = beer.tagline
 
         Glide.with(holder.itemView.context)
-                .load(beer.image)
+                .load(beer.image_url)
                 .apply(RequestOptions.circleCropTransform())
                 .into(holder.beerImage)
     }

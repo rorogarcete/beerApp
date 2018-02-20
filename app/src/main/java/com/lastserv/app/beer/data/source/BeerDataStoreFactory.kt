@@ -10,7 +10,7 @@ import javax.inject.Inject
  */
 open class BeerDataStoreFactory @Inject constructor(
         private val beerCache: BeerCache,
-        private val beerCacheDataStore: BeerRemoteDataStore,
+        private val beerCacheDataStore: BeerCacheDataStore,
         private val beerRemoteDataStore: BeerRemoteDataStore) {
 
     /**
