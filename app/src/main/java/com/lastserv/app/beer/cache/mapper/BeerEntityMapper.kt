@@ -2,7 +2,6 @@ package com.lastserv.app.beer.cache.mapper
 
 import com.lastserv.app.beer.cache.model.CachedBeer
 import com.lastserv.app.beer.data.model.BeerEntity
-
 import javax.inject.Inject
 
 /**
@@ -12,17 +11,17 @@ import javax.inject.Inject
 class BeerEntityMapper @Inject constructor(): EntityMapper<CachedBeer, BeerEntity> {
 
     /**
-     * Map a [BufferooEntity] instance to a [CachedBeer] instance
+     * Map a [BeerEntity] instance to a [CachedBeer] instance
      */
     override fun mapToCached(type: BeerEntity): CachedBeer {
-        return CachedBeer(type.name, type.tagline, type.tagline, type.image)
+        return CachedBeer(type.name, type.description, type.tagline, type.image_url)
     }
 
     /**
-     * Map a [CachedBeer] instance to a [BufferooEntity] instance
+     * Map a [CachedBeer] instance to a [BeerEntity] instance
      */
     override fun mapFromCached(type: CachedBeer): BeerEntity {
-        return BeerEntity(type.name, type.description, type.tagline, type.image)
+        return BeerEntity(type.name, type.description, type.tagline, type.image_url)
     }
 
 }

@@ -2,30 +2,28 @@ package com.lastserv.app.beer.cache
 
 import com.lastserv.app.beer.cache.mapper.BeerEntityMapper
 import com.lastserv.app.beer.cache.model.CachedBeer
-import com.lastserv.app.beer.data.mapper.BeerMapper
 import com.lastserv.app.beer.data.model.BeerEntity
 import com.lastserv.app.beer.data.repository.BeerCache
+import com.vicpin.krealmextensions.queryAll
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.realm.Realm
 import io.realm.kotlin.where
-import java.util.*
 import javax.inject.Inject
 
 /**
- * Cached implementation for retrieving and saving Bufferoo instances. This class implements the
+ * Cached implementation for retrieving and saving Beer instances. This class implements the
  * [BeerCache] from the Data layer as it is that layers responsibility for defining the
- * operations in which data store implementation layers can carry out.
+ * operations in which data store implementation layers.
  */
-class BeerCacheImpl @Inject constructor(realm: Realm,
+class BeerCacheImpl @Inject constructor(realmFactory: Realm,
                                         private val entityMapper: BeerEntityMapper,
-                                        private val mapper: BeerMapper,
                                         private val preferencesHelper: PreferencesHelper):
         BeerCache {
 
     private val EXPIRATION_TIME = (60 * 10 * 1000).toLong()
 
-    private var realm: Realm = Realm.getDefaultInstance()
+    private var realm = realmFactory
 
     /**
      * Retrieve an instance from the database, used for tests
@@ -54,14 +52,14 @@ class BeerCacheImpl @Inject constructor(realm: Realm,
      */
     override fun saveBeers(beers: List<BeerEntity>): Completable {
         return Completable.defer {
-            getRealm().beginTransaction()
+            realm.beginTransaction()
             try {
                 beers.forEach {
                     saveBufferoo(entityMapper.mapToCached(it))
                 }
-                getRealm().close()
+                realm.commitTransaction()
             } finally {
-                getRealm().commitTransaction()
+                realm.close()
             }
             Completable.complete()
         }
@@ -71,10 +69,12 @@ class BeerCacheImpl @Inject constructor(realm: Realm,
      * Retrieve a list of [BeerEntity] instances from the database.
      */
     override fun getBeers(): Single<List<BeerEntity>> {
-        val beers: List<BeerEntity> = Collections.emptyList()
+        var beers = CachedBeer().queryAll()
 
         return Single.defer<List<BeerEntity>> {
-            Single.just<List<BeerEntity>>(beers)
+            Single.just<List<BeerEntity>>(
+                    beers.map { listItem -> entityMapper.mapFromCached(listItem) }
+            )
         }
     }
 
@@ -82,14 +82,14 @@ class BeerCacheImpl @Inject constructor(realm: Realm,
      * Helper method for saving a [CachedBeer] instance to the database.
      */
     private fun saveBufferoo(cachedBeer: CachedBeer) {
-        getRealm().insert(cachedBeer)
+        realm.insert(cachedBeer)
     }
 
     /**
      * Checked whether there are instances of [CachedBeer] stored in the cache
      */
     override fun isCached(): Boolean {
-        return getRealm().where<CachedBeer>().count() > 0
+        return realm.where<CachedBeer>().count() > 0
     }
 
     /**

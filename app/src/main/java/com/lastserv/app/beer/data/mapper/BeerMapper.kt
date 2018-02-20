@@ -2,7 +2,6 @@ package com.lastserv.app.beer.data.mapper
 
 import com.lastserv.app.beer.data.model.BeerEntity
 import com.lastserv.app.beer.domain.model.Beer
-
 import javax.inject.Inject
 
 
@@ -16,14 +15,14 @@ open class BeerMapper @Inject constructor(): Mapper<BeerEntity, Beer> {
      * Map a [BeerEntity] instance to a [Beer] instance
      */
     override fun mapFromEntity(type: BeerEntity): Beer {
-        return Beer(type.name, type.description, type.tagline, type.image)
+        return Beer(type.name, type.description, type.tagline, type.image_url)
     }
 
     /**
      * Map a [Beer] instance to a [BeerEntity] instance
      */
     override fun mapToEntity(type: Beer): BeerEntity {
-        return BeerEntity(type.name, type.description, type.tagline, type.image)
+        return BeerEntity(type.name, type.description, type.tagline, type.image_url)
     }
 
 

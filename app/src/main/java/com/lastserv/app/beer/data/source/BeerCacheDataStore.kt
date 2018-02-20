@@ -3,17 +3,15 @@ package com.lastserv.app.beer.data.source
 import com.lastserv.app.beer.data.model.BeerEntity
 import com.lastserv.app.beer.data.repository.BeerCache
 import com.lastserv.app.beer.data.repository.BeerDataStore
-
 import io.reactivex.Completable
 import io.reactivex.Single
-
 import javax.inject.Inject
 
 /**
- * Implementation of the [BeerDataStore] interface to provide a means of communicating
+ * Implementation of the [BeerCacheDataStore] interface to provide a means of communicating
  * with the local data source
  */
-open class BeerCacheImpl @Inject constructor(private val beerCache: BeerCache) :
+open class BeerCacheDataStore @Inject constructor(private val beerCache: BeerCache) :
         BeerDataStore {
 
     /**
@@ -24,10 +22,10 @@ open class BeerCacheImpl @Inject constructor(private val beerCache: BeerCache) :
     }
 
     /**
-     * Save a given [List] of [BeerEntity] instances to the local database
+     * Save a given [List] of [BeerEntity] instances to the cache
      */
-    override fun saveBeers(beers: List<BeerEntity>): Completable {
-        return beerCache.saveBeers(beers)
+    override fun saveBeers(bufferoos: List<BeerEntity>): Completable {
+        return beerCache.saveBeers(bufferoos)
                 .doOnComplete {
                     beerCache.setLastCacheTime(System.currentTimeMillis())
                 }
@@ -39,4 +37,5 @@ open class BeerCacheImpl @Inject constructor(private val beerCache: BeerCache) :
     override fun getBeers(): Single<List<BeerEntity>> {
         return beerCache.getBeers()
     }
+
 }

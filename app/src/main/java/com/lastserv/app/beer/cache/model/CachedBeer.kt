@@ -9,4 +9,4 @@ open class CachedBeer(
         open var name: String = "",
         open var description: String = "",
         open var tagline: String = "",
-        open var image: String = "") : RealmObject()
+        open var image_url: String = "") : RealmObject()

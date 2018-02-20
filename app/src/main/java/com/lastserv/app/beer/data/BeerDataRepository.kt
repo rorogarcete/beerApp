@@ -2,8 +2,8 @@ package com.lastserv.app.beer.data
 
 import com.lastserv.app.beer.data.mapper.BeerMapper
 import com.lastserv.app.beer.data.model.BeerEntity
-import com.lastserv.app.beer.data.repository.BeerRemote
 import com.lastserv.app.beer.data.source.BeerDataStoreFactory
+import com.lastserv.app.beer.data.source.BeerRemoteDataStore
 import com.lastserv.app.beer.domain.model.Beer
 import com.lastserv.app.beer.domain.repository.BeerRepository
 
@@ -37,7 +37,7 @@ class BeerDataRepository @Inject constructor(
         val dataStore = factory.retrieveDataStore()
         return dataStore.getBeers()
                 .flatMap {
-                    if (dataStore is BeerRemote) {
+                    if (dataStore is BeerRemoteDataStore) {
                         saveBeerEntities(it).toSingle { it }
                     } else {
                         Single.just(it)
